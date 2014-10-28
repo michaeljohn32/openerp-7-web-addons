@@ -30,7 +30,7 @@
     'author': 'Zesty Beanz Technologies',
     'website': 'http://www.zbeanztech.com',
     'depends': ['web'],
-    'js': ['static/src/js/web_printscreen_export.js'],
+    'data': ['views/printscreen_export.xml'],
     'qweb': ['static/src/xml/web_printscreen_export.xml'],
     'installable': True,
     'auto_install': False,
