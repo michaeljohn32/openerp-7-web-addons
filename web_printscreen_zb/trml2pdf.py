@@ -993,7 +993,7 @@ def parseNode(rml, localcontext=None, fout=None, images=None, path='.', title=No
     r = _rml_doc(node, localcontext, images, path, title=title)
     #try to override some font mappings
     try:
-        from customfonts import SetCustomFonts
+        from openerp.report.render.rml2pdf.customfonts import SetCustomFonts
         SetCustomFonts(r)
     except ImportError:
         # means there is no custom fonts mapping in this system.
@@ -1011,7 +1011,7 @@ def parseString(rml, localcontext=None, fout=None, images=None, path='.', title=
 
     #try to override some font mappings
     try:
-        from customfonts import SetCustomFonts
+        from openerp.report.render.rml2pdf.customfonts import SetCustomFonts
         SetCustomFonts(r)
     except Exception:
         pass
