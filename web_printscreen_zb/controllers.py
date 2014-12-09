@@ -32,6 +32,9 @@ except ImportError:
 
 from openerp.addons.web.controllers.main import ExcelExport
 from openerp.addons.web.controllers.main import Export
+import openerp
+from openerp import SUPERUSER_ID
+from openerp.http import request
 import re
 from cStringIO import StringIO
 from lxml  import etree
@@ -169,6 +172,9 @@ class ExportPdf(Export):
             etree.parse(os.path.join(tools.config['root_path'],
                                      'addons/base/report/custom_new.xsl')))
         rml = etree.tostring(transform(new_doc))
+        # Update system font database if it hasn't been called yet, so that system fonts are used by reportlab with better glyph coverage
+        registry = openerp.registry(request.cr.dbname)
+        registry['res.font'].font_scan(request.cr, SUPERUSER_ID, lazy=True, context=request.context)
         self.obj = trml2pdf.parseNode(rml, title='Printscreen')
         return self.obj
 
